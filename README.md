@@ -1,2 +1,2 @@
 # react-auth
-React app with jwt authentication
+Simple React app with jwt authentication
