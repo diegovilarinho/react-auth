@@ -1,11 +1,25 @@
-import path from 'path'
+import webpack from 'webpack';
+
+var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
 
 export default {
-  entry: './client/index.js',
-  output: { path: __dirname, filename: 'bundle.js' },
+  context: __dirname,
+  entry: {
+    client: ['./client/index.js', hotMiddlewareScript]
+  },
+  output: {
+    path: __dirname,
+    publicPath: '/',
+    filename: 'bundle.js'
+  },
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
   module: {
     loaders: [
       {
